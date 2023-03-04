@@ -25,7 +25,7 @@ git clone https://github.com/arfrhmd/zimbra-whitelister.git
 2. Run program
 
 ```sh
-python3 main.py -f list.txt
+python3 main.py -f example.csv
 ```
 
 ## Options
