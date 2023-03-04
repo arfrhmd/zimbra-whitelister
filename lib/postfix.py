@@ -36,8 +36,8 @@ def add_smtp(smtp_domains):
             print(Fore.YELLOW + ' already exist' + Style.RESET_ALL)
 
 def send(line):
-    company = line.split(';')[0]
-    email = line.split(';')[1].replace('>', '')
+    company = line.split(delim)[0]
+    email = line.split(delim)[1].replace('>', '')
     name, _, domain = email.rpartition('@')
     smtp_hostnames = get_smtp_domain(domain)
     print(smtp_hostnames)

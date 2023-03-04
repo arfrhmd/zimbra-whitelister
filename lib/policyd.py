@@ -64,8 +64,8 @@ def check_members(line):
     ]
 
     # Find domains that match the domains in the file domains.txt
-    description = line.split(';')[0]
-    email = line.split(';')[1].replace('>', '')
+    description = line.split(delim)[0]
+    email = line.split(delim)[1].replace('>', '')
     name, _, domain = email.rpartition('@')
     domain = domain.replace('\n', '').lower()
 
