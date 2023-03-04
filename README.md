@@ -13,8 +13,18 @@ git clone https://github.com/arfrhmd/zimbra-whitelister.git
 
 ## Usage example
 
+1. Add file list to `data` folder
+
+```
+.
+└── zimbra-whitelister/
+    └── data/
+        └── example.csv
+```
+
+2. Run program
+
 ```sh
-cd zimbra-whitelister
 python3 main.py -f list.txt
 ```
 
