@@ -2,7 +2,7 @@
 > An app to whitelist emails from a specific domain to CBPolicyd and Postfix
 
 ![Project language](https://img.shields.io/github/languages/top/arfrhmd/zimbra-whitelister)
-[![GitHub release](https://badgen.net/github/release/arfrhmd/zimbra-whitelister)](https://github.com/arfrhmd/zimbra-whitelister/releases/)
+[![GitHub release](https://img.shields.io/github/v/release/arfrhmd/zimbra-whitelister?include_prereleases)](https://github.com/arfrhmd/zimbra-whitelister/releases/)
 [![License](https://img.shields.io/badge/License-MIT-blue)](https://github.com/arfrhmd/zimbra-whitelister/blob/main/LICENSE)
 
 ## Installation
