@@ -9,6 +9,8 @@
 
 ```sh
 git clone https://github.com/arfrhmd/zimbra-whitelister.git
+cd zimbra-whitelister
+pip3 install -r requirements.txt
 ```
 
 ## Usage example
