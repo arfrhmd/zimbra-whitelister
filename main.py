@@ -9,29 +9,27 @@ if __name__ == '__main__':
     if pwd.getpwuid(os.getuid())[0] != 'root':
         print('[x] Please run this script as root')
         exit()
-    parser = argparse.ArgumentParser(description='Format list: description;email')
+    parser = argparse.ArgumentParser()
     parser.add_argument('-d', '--delim', help='set delimiter (Default: ;)', default=';')
     parser.add_argument('-f', '--file', help='list file', required=True)
     parser.add_argument('-po', '--policyd', help='add list to Policyd only', action='store_true')
     parser.add_argument('-ps', '--postfix', help='add list to Postfix only', action='store_true')
-    parser.add_argument('-v', '--version', action='version', version='1.0.0-alpha')
+    parser.add_argument('-v', '--version', action='version', version='1.0.2-alpha')
     args = parser.parse_args()
 
     if args.policyd:
         print(f'[+] Add list to Policyd only\n')
-        if args.delim != ';':
-            policyd.delim = args.delim
+
         policyd.get_existing_list()
         with open(args.file, 'r') as f:
             for line in f:
-                policyd.check_members(line)
+                policyd.check_members(line, delim=args.delim)
     elif args.postfix:
         print('[+] Add list to Postfix only')
-        if args.delim != ';':
-            postfix.delim = args.delim
+
         with open(args.file, 'r') as f:
             for line in f:
-                postfix.send(line)
+                postfix.send(line, delim=args.delim)
                 print('[+] Postmap postfix_rbl_override')
                 os.system('su - zimbra -c "postmap /opt/zimbra/conf/postfix_rbl_override"')
                 print('[+] Apply the changes to the Zimbra Collaboration Server')
@@ -45,8 +43,8 @@ if __name__ == '__main__':
         policyd.get_existing_list()
         with open(args.file, 'r') as f:
             for line in f:
-                policyd.check_members(line)
-                postfix.send(line)
+                policyd.check_members(line, delim=args.delim)
+                postfix.send(line, delim=args.delim)
                 print('[+] Postmap postfix_rbl_override')
                 os.system('su - zimbra -c "postmap /opt/zimbra/conf/postfix_rbl_override"')
                 print('[+] Apply the changes to the Zimbra Collaboration Server')
