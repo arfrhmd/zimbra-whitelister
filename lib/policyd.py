@@ -4,8 +4,6 @@ import time
 from bs4 import BeautifulSoup
 from colorama import Fore, Style
 
-delim = ';'
-
 def get_existing_list():
     url = 'http://127.0.0.1:7780/webui/policy-group-member-main.php?policy_group_id=6'
     r = requests.get(url)
@@ -39,7 +37,7 @@ def get_existing_list():
 
         time.sleep(1)
 
-def check_members(line):
+def check_members(line, delim):
     # Read a list of domains from the file domains.txt
     with open(os.path.join(os.getcwd(), 'data', 'listed-domains.tmp'), 'r') as f:
         domain_list = set(f.read().splitlines())
@@ -76,15 +74,15 @@ def check_members(line):
     else:
         print('[x] ' + Fore.LIGHTGREEN_EX + 'EXIST ' + Style.RESET_ALL + f'{domain} ({description})')
 
-def add_member(domain, company):
-    print(f'[+] Add member {domain} ({company})')
+def add_member(domain, description):
+    print(f'[+] Add member {domain} ({description})')
 
     url = 'http://127.0.0.1:7780/webui/policy-group-member-add.php'
     data = {
         "frmaction": "add2",
         "policy_group_id": "6",
         "policy_group_member_member": f'@{domain}',
-        "policy_group_member_comment": company,
+        "policy_group_member_comment": description,
     }
 
     r = requests.post(url, data=data)
@@ -105,7 +103,7 @@ def add_member(domain, company):
     else:
         # Write failed domains to be added to the file error-policyd.txt
         with open(os.path.join(os.getcwd(), 'data', 'error-policyd.csv'), 'a') as f:
-            f.write(f'{company};{domain}\n')
+            f.write(f'{description};{domain}\n')
         print('[x] ' + Fore.LIGHTRED_EX + 'Failed ' + Style.RESET_ALL + 'add member')
         print('[+] Check it manually on ./data/error-policyd.txt')
 

@@ -2,8 +2,6 @@ import dns.resolver as resolver
 import time
 from colorama import Fore, Style
 
-delim = ';'
-
 def get_smtp_domain(domain):
     smtp_domains = []
     try:
@@ -35,7 +33,7 @@ def add_smtp(smtp_domains):
         else:
             print(Fore.YELLOW + ' already exist' + Style.RESET_ALL)
 
-def send(line):
+def send(line, delim):
     company = line.split(delim)[0]
     email = line.split(delim)[1].replace('>', '')
     name, _, domain = email.rpartition('@')
